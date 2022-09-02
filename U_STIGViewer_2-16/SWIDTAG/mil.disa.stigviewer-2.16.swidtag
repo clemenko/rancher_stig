@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SoftwareIdentity xmlns="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" 
+  xml:lang="en-US" 
+  name="stigviewer" 
+  tagId="mil.disa.stigviewer-2.16" 
+  tagVersion="1" 
+  version="2.16" 
+  versionScheme="multipartnumeric">
+    <Entity name="Defense Information Systems Agency" role="tagCreator softwareCreator" regid="disa.mil" />
+</SoftwareIdentity>
