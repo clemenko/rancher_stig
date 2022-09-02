@@ -28,17 +28,17 @@ Welcome back. We hope you had a chance to read the first of this series [Creatin
 
 ## What is a STIG?
 
-Snapple
-
 ![best_logo](img/DoD-DISA-logos-as-JPEG.jpg)
+
+Plainly put, STIG stands for Standard Technical Implementation Guide. It is a guide on how to configure a system or application to a security standard. The STIG is written in conjunction with the vendor and DISA. Once written it hs heavily reviewed by DISA without the vendors input. This is extremely important for validation purposes.
 
 ### Why are STIGs Important
 
-you know why
+The end result is a technical hardening guide that can be trusted. What is interesting is that Corporations are following the US Government in adopting the STIG as the hardening standard. Effectively creating a Secure Baseline for operating systems, frameworks, and applications. Applying the STIG dramatically decreases the guess work by the IT staff.
 
 ## How are they used in the IC
 
-special ways
+The Department of Defense (DOD) and the Intelligence Community (IC) have been used the STIGs for years as THE security base line for all systems. The DOD/IC has been pushing vendors to work with DISA to write and improve STIGs for all networks levels. An interesting fact is that we are seeing STIGs being applied to lower Impact Levels (IL), such as IL5 and IL4. Meaning the value of the STIGs has a very far reaching impact.
 
 ## Where to find STIGs
 
