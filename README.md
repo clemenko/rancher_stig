@@ -55,15 +55,17 @@ Rancher is the first company to have a multi-cluster Kubernetes manager STIG rel
 
 You can download the STIG itself from [https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip). The SITG viewer can be found on DISA's site at [https://public.cyber.mil/stigs/srg-stig-tools/](https://public.cyber.mil/stigs/srg-stig-tools/).
 
-### How to apply the Rancher STIG
+### How to apply the Rancher STIGs
 
 Thanks to the hard work of the Rancher engineers there are only seven (7) controls for the Rancher STIG. Please understand that this is for the Multi-Cluster Manager layer of the stack. We will talk about the Kubernetes layer in the next major section. Since there are only 7 controls lets review them all.
 
 #### V-252843 - Use an AUTH provider - Keycloak
 
-The control states that an external authentication methods needs to be installed. A very popular is called KeyCloak. [Rancher had great docs](https://rancher.com/docs/rancher/v2.6/en/admin-settings/authentication/keycloak-oidc/) that show how to configure OIDC.
+This control states that an external authentication methods needs to be installed. A very popular is called KeyCloak. [Rancher had great docs](https://rancher.com/docs/rancher/v2.6/en/admin-settings/authentication/keycloak-oidc/) that show how to configure OIDC.
 
 #### V-252844 - Audit Logging
+
+This control is for ensure Audit Logging is enabled.
 
 Fix Text: Ensure audit logging is enabled:
 
@@ -84,7 +86,7 @@ If the variable does not exist:
 * Input "2,3" for a value.
 * Click "Save".
 
-A better option is to update Helm. Here is a best way to update the audit log level. Using Helm we can set a few things like the initial bootstrap password and number of replicas. Notice the `auditlog` settings.
+Leveraging Helm is a great option for ensure everything is set. Simply add `-set auditLog.level=2 --set auditLog.destination=hostPath` to the Helm command or add the similar lines to the `values.yaml` file. Here is an example of the command.
 
 ```bash
 helm upgrade -i rancher rancher-latest/rancher --create-namespace --namespace cattle-system --set hostname=rancher.$domain --set bootstrapPassword=bootStrapAllTheThings --set replicas=1 --set auditLog.level=2 --set auditLog.destination=hostPath
@@ -92,7 +94,7 @@ helm upgrade -i rancher rancher-latest/rancher --create-namespace --namespace ca
 
 #### V-252845 - Role must be User
 
-This control is about adopting a tighter default user role. Basically to scope in the default permissions.
+This control is about adopting a tighter default user role for Ranchers RBAC. Basically to scope in the default permissions.
 
 Fix Text: From the GUI, navigate to Triple Bar Symbol >> Users & Authentication. In the left navigation menu, click "Roles".
 
