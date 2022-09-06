@@ -5,7 +5,7 @@ author: Andy Clemenko, @clemenko, andy.clemenko@rancherfederal.com
 
 # Have you STIG'd your Kubernetes yet
 
-## Don't let down the Engineers and Secure you Kubernetes
+## Don't let down the Engineers and Secure your Kubernetes
 
 Welcome back. We hope you had a chance to read the first of this series [Creating a Secure Kubernetes Deployment](https://intelligencecommunitynews.com/ic-insiders-creating-a-secure-kubernetes-deployment-five-ways-the-new-nsa-kubernetes-hardening-guide-can-help/). In this article we are going a little deeper with Security Technical Implementation Guides (STIGs). We will try not to get too technical. But it is important to highlight some of the more important pieces.
 
@@ -13,7 +13,7 @@ Welcome back. We hope you had a chance to read the first of this series [Creatin
 
 > **Table of Contents**:
 >
-> * [What is a STIG?](#what-is-a-stig?)
+> * [What is a STIG](#what-is-a-stig)
 >   * [Why is it important](#Why-are-STIGs-Important)
 > * [How are they used in the IC](#How-are-all-Kubernetes-not-equal)
 > * [Where to find STIGs](#Rancher---Secure-by-default)
@@ -25,7 +25,7 @@ Welcome back. We hope you had a chance to read the first of this series [Creatin
 
 ---
 
-## What is a STIG?
+## What is a STIG
 
 ![best_logo](img/DoD-DISA-logos-as-JPEG.jpg)
 
