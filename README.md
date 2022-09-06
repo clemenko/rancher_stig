@@ -7,7 +7,7 @@ author: Andy Clemenko, @clemenko, andy.clemenko@rancherfederal.com
 
 ## Don't let down the Engineers and Secure your Kubernetes
 
-Welcome back. We hope you had a chance to read the first of this series [Creating a Secure Kubernetes Deployment](https://intelligencecommunitynews.com/ic-insiders-creating-a-secure-kubernetes-deployment-five-ways-the-new-nsa-kubernetes-hardening-guide-can-help/). In this article we are going a little deeper with Security Technical Implementation Guides (STIGs). We will try not to get too technical. But it is important to highlight some of the more important pieces.
+Welcome back. We hope you had a chance to read the first of this series [Creating a Secure Kubernetes Deployment](https://intelligencecommunitynews.com/ic-insiders-creating-a-secure-kubernetes-deployment-five-ways-the-new-nsa-kubernetes-hardening-guide-can-help/). In this article we are going a little deeper with Security Technical Implementation Guides (STIGs). We will try not to get too technical. But it is important to highlight some of the more important "knobs to turn".
 
 ---
 
@@ -161,7 +161,7 @@ Put the correct and valid DOD certificate and key in files called "tls.crt" and 
 `kubectl -n cattle-system create secret tls tls-rancher-ingress  --cert=tls.crt   --key=tls.key`
 
 Upload the CA required for the certs by creating another file called "cacerts.pem" and running:
-`kubectl -n cattle-system create secret generic tls-ca \   --from-file=cacerts.pem=./cacerts.pem`
+`kubectl -n cattle-system create secret generic tls-ca --from-file=cacerts.pem=./cacerts.pem`
 
 The helm chart values need to be updated to include the check section:
 privateCA: true
@@ -191,7 +191,7 @@ kubectl patch -n cattle-system service rancher --type=json -p '[{"op":"remove","
 
 ## RKE2 STIG
 
-The good news is that similar to the Rancher STIG the RKE2 STIG should not have a lot knobs to turn. At the time of this article's publication the DISA Draft STIG for RKE2 is not ready. However we have a few configurations that will ensure RKE2 is hardened. RKE2 is broken down into servers and agents. We can start with the server configurations.
+The good news is that similar to the Rancher STIG the RKE2 STIG should not have a lot knobs to turn. At the time of this article's publication the STIG for RKE2 is under draft review by DISA. The STIG should be released by November. However we have a few configurations we can tweak to ensure RKE2 is hardened. Basically, RKE2 is broken down into servers and agents. We can start with the server side configurations.
 
 First we should create an Audit Policy. The following should be run on every server in the cluster.
 
@@ -204,7 +204,7 @@ rules:
 EOT
 ```
 
-The second part we are going to looking the config file `/etc/rancher/rke2/config.yaml`. Please note the Selinux setting. It goes without saying that enabling Selinux is also important.
+The second part we are going to looking the config file `/etc/rancher/rke2/config.yaml`. This file should be updated on every server node as well. Please note the Selinux setting. It goes without saying that enabling Selinux is important.
 
 ```bash
 profile: cis-1.6
@@ -228,6 +228,8 @@ kubelet-arg:
 - "protect-kernel-defaults=true"
 ```
 
+Once `/etc/rancher/rke2/config.yaml` is updated simply `systemctl restart rke2-server` to apply the changes.
+
 Now let's look at the agent side of things. The agent also uses `/etc/rancher/rke2/config.yaml`. Please notice that your `token-file` and `server` fields will be different. This is an example of what to set.
 
 ```bash
@@ -241,7 +243,8 @@ kubelet-arg:
 - "protect-kernel-defaults=true"
 ```
 
-The end result of the settings is a hardened RKE2.
+Once `/etc/rancher/rke2/config.yaml` is updated simply `systemctl restart rke2-agent` to apply the changes.
 
 ## What did we learn
 
+Hopefully we didn't bore you too much with all the technical talk. It is important to bridge the gap between the documentation, STIGs, and the knobs to turn. Please pass this article on to the technical folks. Taking the 50 foot view should show how Rancher the company is dedicated to providing a secure Kubernetes and Multi-Cloud manager. Several controls for Rancher and a handful of lines in a config file for RKE2 could not make this whole process any easier. Remember to keep a lookout for the DISA RKE2 STIG in November.
