@@ -85,7 +85,7 @@ Fix Text: Ensure audit logging is enabled:
 * Click "deployments" under Workload menu item.
 * Select "rancher" in the Deployments section under the 'cattle-system' namespace.
 * Click the three dot config menu on the right.
-* Choose "Edit Config".![best_logo](img/DoD-DISA-logos-as-JPEG.jpg)
+* Choose "Edit Config".
 * Scroll down to the "Environment Variables" section.
 * Change the AUDIT_LEVEL value to "2" or "3" and then click "Save".
 
