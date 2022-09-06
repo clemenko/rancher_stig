@@ -7,7 +7,7 @@ author: Andy Clemenko, @clemenko, andy.clemenko@rancherfederal.com
 
 ## Don't let down the Engineers and Secure you Kubernetes
 
-Welcome back. We hope you had a chance to read the first of this series [Creating a Secure Kubernetes Deployment](https://intelligencecommunitynews.com/ic-insiders-creating-a-secure-kubernetes-deployment-five-ways-the-new-nsa-kubernetes-hardening-guide-can-help/). In this article we are going a little deeper with STIGs. We will try not to get too technical. But it is important to highlight some of the more important pieces.
+Welcome back. We hope you had a chance to read the first of this series [Creating a Secure Kubernetes Deployment](https://intelligencecommunitynews.com/ic-insiders-creating-a-secure-kubernetes-deployment-five-ways-the-new-nsa-kubernetes-hardening-guide-can-help/). In this article we are going a little deeper with Security Technical Implementation Guides (STIGs). We will try not to get too technical. But it is important to highlight some of the more important pieces.
 
 ---
 
@@ -25,35 +25,36 @@ Welcome back. We hope you had a chance to read the first of this series [Creatin
 > * [What did we learn](#What-did-we-learn)
 
 ---
-
+s
 ## What is a STIG?
 
 ![best_logo](img/DoD-DISA-logos-as-JPEG.jpg)
 
-Plainly put, STIG stands for Standard Technical Implementation Guide. It is a guide on how to configure a system or application to a security standard. The STIG is written in conjunction with the vendor and DISA. Once written it hs heavily reviewed by DISA without the vendors input. This is extremely important for validation purposes.
+Plainly put, STIG stands for Security Technical Implementation Guide.  It is a guide on how to configure a system or application to a security standard. The STIG is written in conjunction with the vendor and Defense Information Systems Agency (DISA). Once written it hs heavily reviewed by DISA without the vendors input. This is extremely important for validation purposes. More information about STIGs is available on at [public.cyber.mil/stigs/](https://public.cyber.mil/stigs/).
 
 ### Why are STIGs Important
-
+WORK
 The end result is a technical hardening guide that can be trusted. What is interesting is that Corporations are following the US Government in adopting the STIG as the hardening standard. Effectively creating a Secure Baseline for operating systems, frameworks, and applications. Applying the STIG dramatically decreases the guess work by the IT staff.
 
 ## How are they used in the IC
-
+WORK
 The Department of Defense (DOD) and the Intelligence Community (IC) have been used the STIGs for years as THE security base line for all systems. The DOD/IC has been pushing vendors to work with DISA to write and improve STIGs for all networks levels. An interesting fact is that we are seeing STIGs being applied to lower Impact Levels (IL), such as IL5 and IL4. Meaning the value of the STIGs has a very far reaching impact.
 
 ## Where to find STIGs
 
-Generic location - https://public.cyber.mil/stigs/
-The SITG viewer can be found on DISA's site at [https://public.cyber.mil/stigs/srg-stig-tools/](https://public.cyber.mil/stigs/srg-stig-tools/).
+DISA maintains [public.cyber.mil/stigs/](https://public.cyber.mil/stigs/) as the source of truth for all STIGs. There is also [StigViewer](https://www.stigviewer.com/) for another view at the STIGs. DISA has a local Java view on their tools page [public.cyber.mil/stigs/srg-stig-tools/](https://public.cyber.mil/stigs/srg-stig-tools/). For the use of this guide lets take advantage of [StigViewer](https://www.stigviewer.com/). The STIG Viewer has a complete [collection of STIGS](https://www.stigviewer.com/stigs). It is worth a look.
 
 ## What other STIGs are out there
 
-generic k8s stig - https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_Kubernetes_V1R6_STIG.zip
+Currently the only other STIG related to Kubernetes is a [generic one](https://www.stigviewer.com/stig/kubernetes/). The generic STIG is a good reference. Although it lacks the specific details need to actually implement the guidance. Distribution specific guides are more valuable with concise information.
 
 ## Rancher STIG
 
-Rancher is the first company to have a multi-cluster Kubernetes manager STIG release by DISA. This is a huge milestone in proctecing their customers with a validated technical implementation guide. There is a nice article about it from [Businesswire](https://www.businesswire.com/news/home/20220425005143/en/DISA-Validates-Rancher-Government-Solutions%E2%80%99-Security-Technical-Implementation-Guide-for-the-Rancher-Multi-cluster-Manager-2.6-for-Kubernetes).
+Rancher is the first company to have a multi-cluster Kubernetes manager STIG release by DISA. This is a huge milestone in protecting their customers with a validated technical implementation guide. There is a nice article about it from [Businesswire](https://www.businesswire.com/news/home/20220425005143/en/DISA-Validates-Rancher-Government-Solutions%E2%80%99-Security-Technical-Implementation-Guide-for-the-Rancher-Multi-cluster-Manager-2.6-for-Kubernetes).
 
-You can download the STIG itself from [https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip). The SITG viewer can be found on DISA's site at [https://public.cyber.mil/stigs/srg-stig-tools/](https://public.cyber.mil/stigs/srg-stig-tools/).
+You can download the STIG itself from [https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip). Using the online [STIG Viewer - Rancher](https://www.stigviewer.com/stig/rancher_government_solutions_multi-cluster_manager/) we can see all the controls.
+
+![rancher_stig](img/STIG_Viewer_Rancher.jpg)
 
 ### How to apply the Rancher STIGs
 
@@ -61,7 +62,7 @@ Thanks to the hard work of the Rancher engineers there are only seven (7) contro
 
 #### V-252843 - Use an AUTH provider - Keycloak
 
-This control states that an external authentication methods needs to be installed. A very popular is called KeyCloak. [Rancher had great docs](https://rancher.com/docs/rancher/v2.6/en/admin-settings/authentication/keycloak-oidc/) that show how to configure OIDC.
+This control states that an external authentication methods needs to be installed. A very popular is called KeyCloak. [Rancher had great docs](https://rancher.com/docs/rancher/v2.6/en/admin-settings/authentication/keycloak-oidc/) that show how to configure OpenID Connect (OIDC).
 
 #### V-252844 - Audit Logging
 
@@ -74,7 +75,7 @@ Fix Text: Ensure audit logging is enabled:
 * Click "deployments" under Workload menu item.
 * Select "rancher" in the Deployments section under the 'cattle-system' namespace.
 * Click the three dot config menu on the right.
-* Choose "Edit Config".
+* Choose "Edit Config".![best_logo](img/DoD-DISA-logos-as-JPEG.jpg)
 * Scroll down to the "Environment Variables" section.
 * Change the AUDIT_LEVEL value to "2" or "3" and then click "Save".
 
