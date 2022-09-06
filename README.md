@@ -21,32 +21,40 @@ Welcome back. We hope you had a chance to read the first of this series [Creatin
 > * [Rancher STIG](#Key-points-from-the-Guide)
 >   * [How to apply the Rancher STIG](#Kubernetes-Pod-Policy)
 > * [RKE2 STIG](#Key-points-from-the-Guide)
->   * [How to apply RKE STIG](#Kubernetes-Pod-Policy)
 > * [What did we learn](#What-did-we-learn)
 
 ---
-s
+
 ## What is a STIG?
 
 ![best_logo](img/DoD-DISA-logos-as-JPEG.jpg)
 
-Plainly put, STIG stands for Security Technical Implementation Guide.  It is a guide on how to configure a system or application to a security standard. The STIG is written in conjunction with the vendor and Defense Information Systems Agency (DISA). Once written it hs heavily reviewed by DISA without the vendors input. This is extremely important for validation purposes. More information about STIGs is available on at [public.cyber.mil/stigs/](https://public.cyber.mil/stigs/).
+Plainly put, STIG stands for Security Technical Implementation Guide.  It is a guide on how to configure a system or application to a security standard. The STIG is written in conjunction with the vendor and Defense Information Systems Agency (DISA). Once written it hs heavily reviewed by DISA without the vendors input. This is extremely important for validation purposes. More information about STIGs is available on at [public.cyber.mil/stigs/](https://public.cyber.mil/stigs/). One important feature of STIGs are the categories or compliance levels.
+
+* Category 1
+  * Most Severe - vulnerabilities that may result in loss of life, damage to facilities, or a mission failure.
+* Category 2
+  * Severe - vulnerabilities that can result in loss of confidentiality, availability, or integrity.
+* Category 3
+  * Least Severe - vulnerabilities that degrades measures to protect against loss of confidentiality, availability, or integrity.
+
+Regardless of the category all controls are to be considered important. Some controls can be mitigated once they are fully understood.
 
 ### Why are STIGs Important
-WORK
+
 The end result is a technical hardening guide that can be trusted. What is interesting is that Corporations are following the US Government in adopting the STIG as the hardening standard. Effectively creating a Secure Baseline for operating systems, frameworks, and applications. Applying the STIG dramatically decreases the guess work by the IT staff.
 
 ## How are they used in the IC
-WORK
-The Department of Defense (DOD) and the Intelligence Community (IC) have been used the STIGs for years as THE security base line for all systems. The DOD/IC has been pushing vendors to work with DISA to write and improve STIGs for all networks levels. An interesting fact is that we are seeing STIGs being applied to lower Impact Levels (IL), such as IL5 and IL4. Meaning the value of the STIGs has a very far reaching impact.
+
+The Department of Defense (DOD) and the Intelligence Community (IC) have been used the STIGs for years as THE security base line for all systems. The DOD/IC has been pushing vendors to work with DISA to write and improve STIGs for all networks levels. An interesting fact is that we are seeing STIGs being applied to lower Impact Levels (IL), such as IL5 and IL4. Meaning the value of the STIGs have a far reaching impact.
 
 ## Where to find STIGs
 
-DISA maintains [public.cyber.mil/stigs/](https://public.cyber.mil/stigs/) as the source of truth for all STIGs. There is also [StigViewer](https://www.stigviewer.com/) for another view at the STIGs. DISA has a local Java view on their tools page [public.cyber.mil/stigs/srg-stig-tools/](https://public.cyber.mil/stigs/srg-stig-tools/). For the use of this guide lets take advantage of [StigViewer](https://www.stigviewer.com/). The STIG Viewer has a complete [collection of STIGS](https://www.stigviewer.com/stigs). It is worth a look.
+DISA maintains [public.cyber.mil/stigs/](https://public.cyber.mil/stigs/) as the source of truth for all STIGs. There is also [StigViewer](https://www.stigviewer.com/) for an online viewer for the STIGs. DISA has a local Java view on their tools page [public.cyber.mil/stigs/srg-stig-tools/](https://public.cyber.mil/stigs/srg-stig-tools/). For the use of this guide lets take advantage of [StigViewer](https://www.stigviewer.com/). The STIG Viewer has a complete [collection of STIGS](https://www.stigviewer.com/stigs). It is worth a look.
 
 ## What other STIGs are out there
 
-Currently the only other STIG related to Kubernetes is a [generic one](https://www.stigviewer.com/stig/kubernetes/). The generic STIG is a good reference. Although it lacks the specific details need to actually implement the guidance. Distribution specific guides are more valuable with concise information.
+Before looking at the Rancher and RKE2 STIGs we should see what else is out there. Currently the only other STIG related to Kubernetes is a [generic one](https://www.stigviewer.com/stig/kubernetes/). The generic STIG is a good reference. Although it lacks the specific details need to actually implement the guidance. Distribution specific guides are more valuable with concise information.
 
 ![k8s](img/k8s.jpg)
 
@@ -183,6 +191,7 @@ kubectl patch -n cattle-system service rancher --type=json -p '[{"op":"remove","
 
 ## RKE2 STIG
 
-### How to apply RKE STIG
+At the time of this article's publication the DISA Draft STIG for RKE2 is not ready.
 
 ## What did we learn
+
