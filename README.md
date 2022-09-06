@@ -48,13 +48,15 @@ DISA maintains [public.cyber.mil/stigs/](https://public.cyber.mil/stigs/) as the
 
 Currently the only other STIG related to Kubernetes is a [generic one](https://www.stigviewer.com/stig/kubernetes/). The generic STIG is a good reference. Although it lacks the specific details need to actually implement the guidance. Distribution specific guides are more valuable with concise information.
 
+![k8s](img/k8s.jpg)
+
 ## Rancher STIG
 
 Rancher is the first company to have a multi-cluster Kubernetes manager STIG release by DISA. This is a huge milestone in protecting their customers with a validated technical implementation guide. There is a nice article about it from [Businesswire](https://www.businesswire.com/news/home/20220425005143/en/DISA-Validates-Rancher-Government-Solutions%E2%80%99-Security-Technical-Implementation-Guide-for-the-Rancher-Multi-cluster-Manager-2.6-for-Kubernetes).
 
 You can download the STIG itself from [https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip). Using the online [STIG Viewer - Rancher](https://www.stigviewer.com/stig/rancher_government_solutions_multi-cluster_manager/) we can see all the controls.
 
-![rancher_stig](img/STIG_Viewer_Rancher.jpg)
+![rancher_stig](img/rancher.jpg)
 
 ### How to apply the Rancher STIGs
 
