@@ -15,8 +15,8 @@ Welcome back. We hope you had a chance to read the first of this series [Creatin
 >
 > * [What is a STIG](#what-is-a-stig)
 >   * [Why is it important](#Why-are-STIGs-Important)
-> * [How are they used in the IC](#How-are-all-Kubernetes-not-equal)
-> * [Where to find STIGs](#Rancher---Secure-by-default)
+> * [How are they used in the IC](#How-are-they-used-in-the-IC)
+> * [Where to find STIGs](#Where-to-find-STIGs)
 > * [What other STIGs are out there](#Rancher---Secure-by-default)
 > * [Rancher STIG](#Key-points-from-the-Guide)
 >   * [How to apply the Rancher STIG](#Kubernetes-Pod-Policy)
@@ -191,7 +191,57 @@ kubectl patch -n cattle-system service rancher --type=json -p '[{"op":"remove","
 
 ## RKE2 STIG
 
-At the time of this article's publication the DISA Draft STIG for RKE2 is not ready.
+The good news is that similar to the Rancher STIG the RKE2 STIG should not have a lot knobs to turn. At the time of this article's publication the DISA Draft STIG for RKE2 is not ready. However we have a few configurations that will ensure RKE2 is hardened. RKE2 is broken down into servers and agents. We can start with the server configurations.
+
+First we should create an Audit Policy. The following should be run on every server in the cluster.
+
+```bash
+cat <<EOT > /etc/rancher/rke2/audit-policy.yaml
+apiVersion: audit.k8s.io/v1
+kind: Policy
+rules:
+- level: RequestResponse
+EOT
+```
+
+The second part we are going to looking the config file `/etc/rancher/rke2/config.yaml`. Please note the Selinux setting. It goes without saying that enabling Selinux is also important.
+
+```bash
+profile: cis-1.6
+selinux: true
+write-kubeconfig-mode: 0640
+use-service-account-credentials: true
+kube-controller-manager-arg:
+- "tls-min-version=VersionTLS12"
+- "tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+kube-scheduler-arg:
+- "tls-min-version=VersionTLS12"
+- "tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+kube-apiserver-arg:
+- "tls-min-version=VersionTLS12"
+- "tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+- "authorization-mode=RBAC,Node"
+- "anonymous-auth=false"
+- "audit-policy-file=/etc/rancher/rke2/audit-policy.yaml"
+- "audit-log-mode=blocking-strict"
+kubelet-arg:
+- "protect-kernel-defaults=true"
+```
+
+Now let's look at the agent side of things. The agent also uses `/etc/rancher/rke2/config.yaml`. Please notice that your `token-file` and `server` fields will be different. This is an example of what to set.
+
+```bash
+token-file: /etc/rancher/rke2/join_token
+server: https://$RKE_SERVER:9345
+write-kubeconfig-mode: 0640
+profile: cis-1.6
+kube-apiserver-arg:
+- "authorization-mode=RBAC,Node"
+kubelet-arg:
+- "protect-kernel-defaults=true"
+```
+
+The end result of the settings is a hardened RKE2.
 
 ## What did we learn
 
