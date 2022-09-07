@@ -210,8 +210,8 @@ The second part we are going to looking the config file `/etc/rancher/rke2/confi
 profile: cis-1.6
 selinux: true
 write-kubeconfig-mode: 0640
-use-service-account-credentials: true
 kube-controller-manager-arg:
+- "use-service-account-credentials=true"
 - "tls-min-version=VersionTLS12"
 - "tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
 kube-scheduler-arg:
