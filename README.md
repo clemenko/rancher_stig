@@ -209,6 +209,7 @@ The second part we are going to looking the config file `/etc/rancher/rke2/confi
 ```bash
 profile: cis-1.6
 selinux: true
+secrets-encryption: true
 write-kubeconfig-mode: 0640
 kube-controller-manager-arg:
 - "use-service-account-credentials=true"
