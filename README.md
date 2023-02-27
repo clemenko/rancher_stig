@@ -62,7 +62,7 @@ Before looking at the Rancher and RKE2 STIGs we should see what else is out ther
 
 Rancher is the first company to have a multi-cluster Kubernetes manager STIG release by DISA. This is a huge milestone in protecting their customers with a validated technical implementation guide. There is a nice article about it from [Businesswire](https://www.businesswire.com/news/home/20220425005143/en/DISA-Validates-Rancher-Government-Solutions%E2%80%99-Security-Technical-Implementation-Guide-for-the-Rancher-Multi-cluster-Manager-2.6-for-Kubernetes).
 
-You can download the STIG itself from [https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R1_STIG.zip). Using the online [STIG Viewer - Rancher](https://www.stigviewer.com/stig/rancher_government_solutions_multi-cluster_manager/) we can see all the controls.
+You can download the STIG itself from [https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R2_STIG.zip](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_MCM_V1R2_STIG.zip). Using the online [STIG Viewer - Rancher](https://www.stigviewer.com/stig/rancher_government_solutions_multi-cluster_manager/) we can see all the controls.
 
 ![rancher_stig](img/rancher.jpg)
 
@@ -191,7 +191,7 @@ kubectl patch -n cattle-system service rancher --type=json -p '[{"op":"remove","
 
 ## RKE2 STIG
 
-The good news is that similar to the Rancher STIG the RKE2 STIG should not have a lot knobs to turn. At the time of this article's publication the STIG for RKE2 is under draft review by DISA. The STIG should be released by November. However we have a few configurations we can tweak to ensure RKE2 is hardened. Basically, RKE2 is broken down into servers and agents. We can start with the server side configurations.
+The good news is that similar to the Rancher STIG the RKE2 STIG should not have a lot knobs to turn. ~~At the time of this article's publication the STIG for RKE2 is under draft review by DISA. The STIG should be released by November.~~ Good news, the STIG is out and can be found at [https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_RKE2_V1R1_STIG.zip](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RGS_RKE2_V1R1_STIG.zip). More good news,The tweaks are fairly minimal to apply the STIG. Basically, RKE2 is broken down into servers and agents. We can start with the server side configurations.
 
 First we should create an Audit Policy. The following should be run on every server in the cluster.
 
